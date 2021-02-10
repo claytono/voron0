@@ -1,0 +1,153 @@
+---
+connectors:
+  # Toolhead connector 1
+  TH1:
+    type: Microfit 3.0
+    subtype: female
+    # Note, Part cooling fans are separate at the toolhead, but combined later
+    # on, to make replacing them individually easier.
+    pinlabels:
+      # 1
+      - HE_FAN_VCC
+      # 2
+      - PC_FANL_VCC
+      # 3
+      - PC_FANR_VCC
+      # 4
+      - HE_TEMP1
+      # 5
+      - Y_END_STOP_1
+      # 6
+      - HE_FAN_GND
+      # 7
+      - PC_FANL_GND
+      # 8
+      - PC_FANR_GND
+      # 9
+      - HE_TEMP2
+      # 10
+      - Y_END_STOP_2
+    pincolors:
+      - WH # HE_FAN_VCC
+      - WH # PC_FANL_VCC
+      - WH # PC_FANR_VCC
+      - WH # HE_TEMP1
+      - WH # Y endstop
+      - BU # HE_FAN_GND
+      - BU # PC_FANL_GND
+      - BU # PC_FANR_GND
+      - WH # HE_TEMP2
+      - WH # Y endstop
+
+  # Toolhead connector 2
+  TH2:
+    type: Microfit 3.0
+    subtype: female
+    pinlabels: [ HEATER_VCC, HEATER_GND ]
+    pincolors: [ RD, BK ]
+    notes: Hotend Heater
+
+  # Toolhead connector 3 - Extruder Stepper
+  TH3:
+    type: Microfit 3.0
+    subtype: female
+    pinlabels: [ 1B, 1A, 2A, 2B ]
+    pincolors: [ RD, OL, YE, BU ]
+    notes: Extruder
+
+  # A/B plate connector 1
+  AB1:
+    type: Microfit 3.0
+    subtype: male
+    pincount: 20
+    pinlabels:
+      # 1
+      - HE_FAN_VCC
+      # 2
+      - PC_FANL_VCC
+      # 3
+      - PC_FANR_VCC
+      # 4
+      - HE_TEMP1
+      # 5
+      - Y_END_STOP_1
+      # 6
+      - HEATER_VCC
+      # 7
+      - EXTRUDER_1B
+      # 8
+      - EXTRUDER_1A
+      # 9
+      - UNUSED
+      # 10
+      - UNUSED
+      # 11
+      - HE_FAN_GND
+      # 12
+      - PC_FANL_GND
+      # 13
+      - PC_FANR_GND
+      # 14
+      - HE_TEMP2
+      # 15
+      - Y_END_STOP_2
+      # 16
+      - HEATER_GND
+      # 17
+      - EXTRUDER_2A
+      # 18
+      - EXTRUDER_2B
+      # 19
+      - UNUSED
+      # 20
+      - UNUSED
+
+cables:
+  UMBILICAL:
+    gauge: 24 AWG
+    wirecount: 16
+    length: 0.24
+    colors:
+     - WH # 1
+     - WH # 2
+     - WH # 3
+     - WH # 4
+     - WH # 5
+     - RD # 6
+     - RD # 7
+     - OL # 8
+     - BU # 11
+     - BU # 12
+     - BU # 13
+     - WH # 14
+     - WH # 15
+     - BK # 16
+     - YE # 17
+     - BU # 18
+
+
+connections:
+  -
+    - TH1: [1-5]
+    - UMBILICAL: [1-5]
+    - AB1: [1-5]
+  -
+    - TH1: [6-10]
+    - UMBILICAL: [9-13]
+    - AB1: [11-15]
+  -
+    - TH2: [1]
+    - UMBILICAL: [6]
+    - AB1: [6]
+  -
+    - TH2: [2]
+    - UMBILICAL: [14]
+    - AB1: [16]
+  -
+    - TH3: [1-2]
+    - UMBILICAL: [7-8]
+    - AB1: [7-8]
+  -
+    - TH3: [3-4]
+    - UMBILICAL: [15-16]
+    - AB1: [17-18]
